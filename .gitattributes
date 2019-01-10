@@ -3,3 +3,4 @@
 
 # Force LF line ending on these files
 *.sh eol=lf
+*.seed eol=lf

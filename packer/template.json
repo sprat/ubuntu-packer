@@ -21,12 +21,10 @@
       "floppy_files": [
         "preseed/*"
       ],
-      "iso_urls": [
-        "iso/ubuntu-{{ user `ubuntu_release` }}-server-amd64.iso",
-        "http://cdimage.ubuntu.com/ubuntu/releases/{{ user `ubuntu_release` }}/release/ubuntu-{{ user `ubuntu_release` }}-server-amd64.iso"
-      ],
-      "iso_checksum": "{{ user `ubuntu_release_checksum` }}",
+      "iso_url": "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}",
+      "iso_checksum_url": "{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
       "iso_checksum_type": "sha256",
+      "iso_interface": "sata",
       "keep_registered": true,
       "output_directory": "builds/{{user `box_name`}}.virtualbox",
       "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",

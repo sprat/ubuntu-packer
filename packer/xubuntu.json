@@ -1,8 +1,8 @@
 {
   "_comment": "xubuntu variables file for ubuntu packer template",
   "box_name": "xubuntu",
-  "ubuntu_release": "18.04.1",
-  "ubuntu_release_checksum": "a5b0ea5918f850124f3d72ef4b85bda82f0fcd02ec721be19c1a6952791c8ee8",
+  "ubuntu_iso_filename": "ubuntu-18.04.1-server-amd64.iso",
+  "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/releases/18.04.1/release/",
   "preseed": "xubuntu.vm.cfg",
   "cpus": "1",
   "memory": "1024",

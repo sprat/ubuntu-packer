@@ -37,8 +37,7 @@
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
         ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
-        ["modifyvm", "{{.Name}}", "--vram", "256"],
-        ["modifyvm", "{{.Name}}", "--accelerate2dvideo", "on"]
+        ["modifyvm", "{{.Name}}", "--vram", "256"]
       ],
       "vm_name": "{{ user `box_name` }}"
     }

@@ -1,0 +1,10 @@
+{
+  "_comment": "xubuntu variables file for ubuntu packer template",
+  "box_name": "xubuntu",
+  "ubuntu_iso_filename": "bionic-server-amd64.iso",
+  "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/current/",
+  "preseed": "xubuntu.vm.cfg",
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "32768"
+}

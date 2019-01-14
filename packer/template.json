@@ -35,8 +35,10 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
         ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
-        ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"]
+        ["modifyvm", "{{.Name}}", "--vram", "256"],
+        ["modifyvm", "{{.Name}}", "--accelerate2dvideo", "on"]
       ],
       "vm_name": "{{ user `box_name` }}"
     }

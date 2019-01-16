@@ -3,7 +3,7 @@
   "box_name": "xubuntu",
   "ubuntu_iso_filename": "ubuntu-18.04.1-server-amd64.iso",
   "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/releases/18.04.1/release/",
-  "preseed": "xubuntu.vm.cfg",
+  "preseed": "xubuntu.cfg",
   "cpus": "1",
   "memory": "1024",
   "disk_size": "32768"

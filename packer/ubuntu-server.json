@@ -1,8 +1,6 @@
 {
   "_comment": "variables file for ubuntu packer template",
   "box_name": "ubuntu-server",
-  "ubuntu_iso_filename": "ubuntu-18.04.1-server-amd64.iso",
-  "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/releases/18.04.1/release/",
   "preseed": "ubuntu-server.cfg",
   "cpus": "1",
   "memory": "1024",

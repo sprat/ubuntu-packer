@@ -7,9 +7,9 @@ chmod 440 /etc/sudoers.d/99_vagrant
 SSH_DIR=/home/vagrant/.ssh
 mkdir -p $SSH_DIR
 wget https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub -O $SSH_DIR/authorized_keys
-chown -R vagrant $SSH_DIR
+chown -R vagrant:vagrant $SSH_DIR
 chmod 700 $SSH_DIR
 chmod 600 $SSH_DIR/authorized_keys
 
-#sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=sudo' /etc/sudoers
-#SSH UseDNS: no
+# TODO: Disable password authentication in SSH config?
+# TODO: UseDNS: no in SSH config?

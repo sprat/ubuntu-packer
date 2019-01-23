@@ -39,6 +39,13 @@
       "vm_name": "{{ user `box_name` }}"
     }
   ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S {{.Path}}",
+      "script": "packer/postinstall.sh"
+    }
+  ],
   "post-processors": [
     {
       "type": "vagrant",

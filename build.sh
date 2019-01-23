@@ -1,12 +1,13 @@
 #!/bin/bash
-if [ "$#" -lt 1 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Usage: $0 name"
-    echo "where name: xubuntu | ..."
+    echo "where name: ubuntu-server, xubuntu, ..."
     exit 1
 fi
 
+UBUNTU_ISO_DATE=$(date -u +%Y%m%d)
 UBUNTU_ISO_FILENAME="bionic-server-amd64.iso"
-UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/$(date -u +%Y%m%d)/"
+UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/$UBUNTU_ISO_DATE/"
 
 # UBUNTU_ISO_FILENAME="ubuntu-18.04.1-server-amd64.iso"
 # UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/releases/18.04.1/release/"

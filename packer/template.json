@@ -31,6 +31,7 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
       "vboxmanage": [
+        ["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"],
         ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
         ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
         ["modifyvm", "{{.Name}}", "--vram", "256"]

@@ -5,10 +5,11 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-UBUNTU_ISO_DATE=$(date -u +%Y%m%d)
+# You may encounter 416 HTTP errors: please delete the packer_cache when it
+# happens. It should be solved in packer version 1.3.5, see
+# https://github.com/hashicorp/packer/issues/6443 for details
 UBUNTU_ISO_FILENAME="bionic-server-amd64.iso"
-UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/$UBUNTU_ISO_DATE/"
-
+UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/current/"
 # UBUNTU_ISO_FILENAME="ubuntu-18.04.1-server-amd64.iso"
 # UBUNTU_ISO_BASE_URL="http://cdimage.ubuntu.com/releases/18.04.1/release/"
 

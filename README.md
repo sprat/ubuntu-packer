@@ -4,7 +4,7 @@ This project is about building base Ubuntu boxes to be used with
 [Vagrant](https://www.vagrantup.com/).
 
 Compared to other Ubuntu base boxes, we tried to keep the installation as
-vanilla/standard as possible, so that the images ressemble a typical manual
+vanilla/standard as possible, so that the images resemble a typical manual
 install from a CD image on a recent machine using the default values from the
 installer.
 
@@ -17,6 +17,9 @@ However, there are still some differences that can't be avoided:
   many useless drivers and to keep the box size relatively small
 - The VirtualBox Guest additions are installed for best virtualization support.
   Note that they are installed via apt, so they can be upgraded easily.
+- Automatic updates are disabled because it may cause problems during
+  provisioning. If you want to enable back the automatic updates, please delete
+  the file `/etc/apt/apt.conf.d/99no-periodic-updates` in the VM.
 - A LVM filesystem is used instead of the legacy one so that the VM hard disks
   can be easily resized.
 - Since the desktop live CD installation can't be easily automated, we start

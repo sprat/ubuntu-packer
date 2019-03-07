@@ -13,7 +13,6 @@
         "-- <wait><enter>"
       ],
       "boot_wait": "10s",
-      "disk_size": "{{user `disk_size`}}",
       "guest_additions_mode": "disable",
       "guest_os_type": "Ubuntu_64",
       "hard_drive_interface": "sata",
@@ -30,12 +29,13 @@
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_wait_timeout": "10000s",
+      "cpus": "{{ user `cpus` }}",
+      "memory": "{{ user `memory` }}",
+      "disk_size": "{{user `disk_size`}}",
       "vboxmanage": [
         ["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"],
         ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
         ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
-        ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
-        ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
         ["modifyvm", "{{.Name}}", "--vram", "256"]
       ],
       "vm_name": "{{ user `box_name` }}"

@@ -44,7 +44,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S '{{.Path}}'",
+      "execute_command": "chmod +x {{ .Path }} && echo 'vagrant' | {{ .Vars }} sudo -E -S {{ .Path }}",
       "script": "scripts/postinstall.sh"
     }
   ],

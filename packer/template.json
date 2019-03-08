@@ -55,7 +55,7 @@
     }
   ],
   "variables": {
-    "ubuntu_iso_filename": "bionic-server-amd64.iso",
-    "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/current/"
+    "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/ubuntu-server/bionic/daily/current/",
+    "ubuntu_iso_filename": "bionic-server-amd64.iso"
   }
 }

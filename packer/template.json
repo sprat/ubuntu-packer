@@ -38,6 +38,7 @@
         ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
         ["modifyvm", "{{.Name}}", "--vram", "256"]
       ],
+      "output_directory": "output-{{ user `box_name` }}",
       "vm_name": "{{ user `box_name` }}"
     }
   ],

@@ -1,7 +1,6 @@
 {
   "_comment": "variables file for ubuntu packer template",
-  "box_name": "ubuntu-server",
-  "preseed": "ubuntu-server.cfg",
+  "name": "ubuntu-server",
   "cpus": "1",
   "memory": "1024",
   "disk_size": "32768"

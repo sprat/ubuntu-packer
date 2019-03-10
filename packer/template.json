@@ -9,7 +9,7 @@
         "auto=true ",
         "vga=normal ",
         "fb=false ",
-        "file=/floppy/{{user `preseed`}} ",
+        "file=/floppy/{{ user `name` }}.cfg ",
         "-- <wait><enter>"
       ],
       "boot_wait": "10s",
@@ -39,8 +39,8 @@
         ["modifyvm", "{{.Name}}", "--vram", "256"]
       ],
       "virtualbox_version_file": "",
-      "output_directory": "output-{{ user `box_name` }}",
-      "vm_name": "{{ user `box_name` }}"
+      "output_directory": "output-{{ user `name` }}",
+      "vm_name": "{{ user `name` }}"
     }
   ],
   "provisioners": [
@@ -55,7 +55,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "builds/{{ user `box_name` }}_{{.Provider}}.box"
+      "output": "builds/{{ user `name` }}_{{.Provider}}.box"
     }
   ],
   "variables": {

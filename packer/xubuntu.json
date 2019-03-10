@@ -1,7 +1,6 @@
 {
   "_comment": "variables file for ubuntu packer template",
-  "box_name": "xubuntu",
-  "preseed": "xubuntu.cfg",
+  "name": "xubuntu",
   "cpus": "1",
   "memory": "1024",
   "disk_size": "32768"

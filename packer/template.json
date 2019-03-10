@@ -48,6 +48,9 @@
       "type": "shell",
       "execute_command": "chmod +x {{ .Path }} && echo 'vagrant' | {{ .Vars }} sudo -E -S {{ .Path }}",
       "expect_disconnect": true,
+      "environment_vars": [
+        "DEBIAN_FRONTEND=noninteractive"
+      ],
       "scripts": [
         "scripts/update.sh",
         "scripts/postinstall.sh"

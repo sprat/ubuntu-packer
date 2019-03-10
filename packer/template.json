@@ -47,7 +47,9 @@
     {
       "type": "shell",
       "execute_command": "chmod +x {{ .Path }} && echo 'vagrant' | {{ .Vars }} sudo -E -S {{ .Path }}",
-      "script": "scripts/postinstall.sh"
+      "scripts": [
+        "scripts/postinstall.sh"
+      ]
     }
   ],
   "post-processors": [

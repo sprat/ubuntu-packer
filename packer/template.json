@@ -53,7 +53,7 @@
       "scripts": [
         "scripts/update.sh",
         "scripts/virtualbox.sh",
-        "scripts/postinstall.sh"
+        "scripts/configure.sh"
       ]
     }
   ],

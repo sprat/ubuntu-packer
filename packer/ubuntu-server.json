@@ -1,7 +1,0 @@
-{
-  "_comment": "variables file for ubuntu packer template",
-  "name": "ubuntu-server",
-  "cpus": "1",
-  "memory": "1024",
-  "disk_size": "32768"
-}

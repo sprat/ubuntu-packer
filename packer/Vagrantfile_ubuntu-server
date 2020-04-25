@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+    config.vm.define "vagrant-ubuntu-server"
+    config.vm.box = "ubuntu-server"
+
+    config.vm.provider :virtualbox do |v|
+        v.gui = true
+        v.default_nic_type = "virtio"
+        v.customize ["modifyvm", :id, "--memory", 1024]
+        v.customize ["modifyvm", :id, "--cpus", 1]
+        v.customize ["modifyvm", :id, "--vram", "256"]
+        v.customize ["modifyvm", :id, "--accelerate3d", "on"]
+        v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    end
+end

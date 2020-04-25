@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
   config.vm.define "ubuntu-server" do |target|
-    target.vm.box = "builds/ubuntu-server_virtualbox.box"
+    target.vm.box = "builds/ubuntu-server-20.04_virtualbox.box"
     target.vm.provider "virtualbox" do |vbox|
       vbox.default_nic_type = "virtio"
       vbox.cpus = 1
@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "xubuntu" do |target|
-    target.vm.box = "builds/xubuntu_virtualbox.box"
+    target.vm.box = "builds/xubuntu-20.04_virtualbox.box"
     target.vm.provider "virtualbox" do |vbox|
       vbox.default_nic_type = "virtio"
       vbox.cpus = 2

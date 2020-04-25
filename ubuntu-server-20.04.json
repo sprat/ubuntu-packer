@@ -1,0 +1,10 @@
+{
+  "_comment": "Variables file for ubuntu packer template - Ubuntu 20.04 server",
+  "name": "ubuntu-server-20.04",
+  "profile": "ubuntu-server",
+  "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/",
+  "ubuntu_iso_filename": "ubuntu-20.04-legacy-server-amd64.iso",
+  "cpus": "1",
+  "memory": "1024",
+  "disk_size": "32768"
+}

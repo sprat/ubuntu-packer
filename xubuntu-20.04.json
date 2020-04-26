@@ -4,7 +4,7 @@
   "profile": "xubuntu",
   "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/",
   "ubuntu_iso_filename": "ubuntu-20.04-legacy-server-amd64.iso",
-  "cpus": "1",
-  "memory": "1024",
+  "cpus": "2",
+  "memory": "2048",
   "disk_size": "32768"
 }

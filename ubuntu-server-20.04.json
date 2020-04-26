@@ -6,5 +6,5 @@
   "ubuntu_iso_filename": "ubuntu-20.04-legacy-server-amd64.iso",
   "cpus": "1",
   "memory": "1024",
-  "disk_size": "32768"
+  "disk_size": "16384"
 }

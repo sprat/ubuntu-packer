@@ -16,8 +16,5 @@ chmod 600 $SSH_DIR/authorized_keys
 # Disable password authentication in SSH server for security purpose
 sed -i 's/[#]*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
-# Disable APT periodic updates
-echo "APT::Periodic::Enable \"0\";" >/etc/apt/apt.conf.d/99no-periodic-updates
-
 # Get a new machine ID generated on first boot
 truncate -s 0 /etc/machine-id

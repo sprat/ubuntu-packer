@@ -1,4 +1,4 @@
 .vagrant
-builds
-output-*
+boxes
+outputs
 packer_cache

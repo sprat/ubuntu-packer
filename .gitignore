@@ -1,6 +1,5 @@
 .vagrant
-boxes
-outputs
+builds
 isos
 packer_cache
 packer.log

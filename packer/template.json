@@ -3,6 +3,7 @@
     {
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
+      "headless": true,
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz ",
@@ -14,7 +15,6 @@
         "-- <wait><enter>"
       ],
       "boot_wait": "25s",
-      "headless": true,
       "floppy_files": [
         "preseed/*"
       "iso_urls": [
@@ -38,7 +38,7 @@
       ],
       "virtualbox_version_file": "",
       "vm_name": "{{ user `name` }}",
-      "output_directory": "outputs"
+      "output_directory": "builds/output-{{ user `name` }}"
     }
   ],
   "provisioners": [
@@ -59,7 +59,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "boxes/{{ user `name` }}_{{.Provider}}.box",
+      "output": "builds/{{ user `name` }}_{{.Provider}}.box",
       "vagrantfile_template": "packer/Vagrantfile_{{ user `profile` }}"
     }
   ]

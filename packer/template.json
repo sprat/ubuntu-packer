@@ -2,6 +2,7 @@
   "builders": [
     {
       "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz ",
@@ -13,12 +14,13 @@
         "-- <wait><enter>"
       ],
       "boot_wait": "25s",
-      "guest_os_type": "Ubuntu_64",
       "headless": true,
       "floppy_files": [
         "preseed/*"
+      "iso_urls": [
+        "isos/{{ user `ubuntu_iso_filename` }}",
+        "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}"
       ],
-      "iso_url": "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}",
       "iso_checksum_url": "{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
       "iso_checksum_type": "sha256",
       "iso_interface": "sata",

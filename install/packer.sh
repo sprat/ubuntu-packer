@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eu
-PACKER_VERSION="1.5.5"
+PACKER_VERSION="1.5.6"
 PACKER_DOWNLOAD_URL="https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip"
 
 # make sure we run the installation script as root

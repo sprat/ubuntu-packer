@@ -10,4 +10,4 @@ install:
   - sudo ./install/vagrant.sh
   - sudo ./install/packer.sh
 script:
-  - ./build ubuntu-server-20.04.json
+  - ./build focal-server.json

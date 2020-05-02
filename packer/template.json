@@ -5,36 +5,37 @@
       "guest_os_type": "Ubuntu_64",
       "headless": true,
       "boot_command": [
-        "<esc><esc><enter><wait>",
-        "/install/vmlinuz ",
-        "initrd=/install/initrd.gz ",
-        "auto=true ",
-        "vga=normal ",
-        "fb=false ",
-        "file=/floppy/{{ user `profile` }}.cfg ",
-        "-- <wait><enter>"
+        "<esc><wait><esc><wait><esc><wait><enter>",
+        "/casper/vmlinuz ",
+        "initrd=/casper/initrd ",
+        "quiet autoinstall ",
+        "ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
+        "---<wait><enter>"
       ],
-      "boot_wait": "25s",
-      "floppy_files": [
-        "preseed/*"
+      "boot_wait": "6s",
+      "http_directory": "packer/http",
       "iso_urls": [
         "isos/{{ user `ubuntu_iso_filename` }}",
         "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}"
       ],
       "iso_checksum_url": "{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
       "iso_checksum_type": "sha256",
-      "iso_interface": "sata",
-      "hard_drive_interface": "sata",
-      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "10000s",
+      "ssh_private_key_file": "~/.vagrant.d/insecure_private_key",
+      "ssh_wait_timeout": "1h",
+      "ssh_read_write_timeout": "5m",
+      "ssh_handshake_attempts": "1000",
+      "shutdown_command": "sudo shutdown -P now",
       "cpus": "{{ user `cpus` }}",
       "memory": "{{ user `memory` }}",
       "disk_size": "{{user `disk_size`}}",
       "vboxmanage": [
-        ["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"],
-        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"]
+        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+        ["modifyvm", "{{.Name}}", "--vram", "64"],
+        ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
+        ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
+        ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"]
       ],
       "virtualbox_version_file": "",
       "vm_name": "{{ user `name` }}",
@@ -44,23 +45,30 @@
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "chmod +x {{ .Path }} && echo 'vagrant' | {{ .Vars }} sudo -E -S {{ .Path }}",
+      "execute_command": "sudo bash {{ .Path }}",
+      "script": "packer/scripts/1_upgrade.sh",
       "expect_disconnect": true,
-      "environment_vars": [
-        "DEBIAN_FRONTEND=noninteractive"
-      ],
-      "scripts": [
-        "scripts/update.sh",
-        "scripts/virtualbox.sh",
-        "scripts/configure.sh"
-      ]
+      "pause_before": "60s"
+    },
+    {
+      "type": "shell",
+      "execute_command": "sudo bash {{ .Path }}",
+      "script": "packer/scripts/2_virtualbox.sh",
+      "expect_disconnect": true,
+      "pause_before": "60s"
+    },
+    {
+      "type": "shell",
+      "execute_command": "sudo bash {{ .Path }}",
+      "script": "packer/scripts/3_configure_and_cleanup.sh",
+      "pause_before": "60s"
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
       "output": "builds/{{ user `name` }}_{{.Provider}}.box",
-      "vagrantfile_template": "packer/Vagrantfile_{{ user `profile` }}"
+      "vagrantfile_template": "packer/Vagrantfile_template"
     }
   ]
 }

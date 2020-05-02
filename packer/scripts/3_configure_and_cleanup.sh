@@ -2,6 +2,10 @@
 set -eux
 export DEBIAN_FRONTEND=noninteractive
 
+# optimize grub
+echo 'GRUB_TERMINAL=console' >/etc/default/grub.d/console.cfg
+update-grub
+
 # disable automatic updates/upgrades
 echo 'APT::Periodic::Enable "0";' >/etc/apt/apt.conf.d/99no-periodic-updates
 chmod 644 /etc/apt/apt.conf.d/99no-periodic-updates

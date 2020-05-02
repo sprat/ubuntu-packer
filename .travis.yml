@@ -9,5 +9,7 @@ install:
   - sudo ./install/virtualbox.sh
   - sudo ./install/vagrant.sh
   - sudo ./install/packer.sh
+  - vagrant version
+  - packer version
 script:
   - ./build focal-server.json

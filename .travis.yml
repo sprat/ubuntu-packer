@@ -12,4 +12,4 @@ install:
   - vagrant version
   - packer version
 script:
-  - ./build focal-server.json
+  - travis_wait 30 ./build focal-server.json

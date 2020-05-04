@@ -8,9 +8,7 @@
         "<esc><wait><esc><wait><esc><wait><enter>",
         "/casper/vmlinuz ",
         "initrd=/casper/initrd ",
-        "quiet autoinstall ",
-        "ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
-        "console=ttyS0 console=tty0 ignore_loglevel ",
+        "{{ user `install_options` }} ",
         "---<wait><enter>"
       ],
       "boot_wait": "7s",

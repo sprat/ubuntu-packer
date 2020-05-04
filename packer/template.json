@@ -10,9 +10,10 @@
         "initrd=/casper/initrd ",
         "quiet autoinstall ",
         "ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
+        "console=ttyS0 console=tty0 ignore_loglevel ",
         "---<wait><enter>"
       ],
-      "boot_wait": "6s",
+      "boot_wait": "7s",
       "http_directory": "packer/http",
       "iso_urls": [
         "isos/{{ user `ubuntu_iso_filename` }}",
@@ -35,7 +36,9 @@
         ["modifyvm", "{{.Name}}", "--vram", "64"],
         ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
         ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
-        ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"]
+        ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"],
+        ["modifyvm", "{{.Name}}", "--uart1", "0x3f8", "4"],
+        ["modifyvm", "{{.Name}}", "--uartmode1", "file", "./serial.log"]
       ],
       "virtualbox_version_file": "",
       "vm_name": "{{ user `name` }}",

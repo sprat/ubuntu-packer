@@ -2,4 +2,4 @@
 builds
 isos
 packer_cache
-packer.log
+*.log

@@ -5,4 +5,4 @@ if [ "$#" -lt 1 ]; then
     exit 1
 fi
 
-PACKER_LOG=1 PACKER_LOG_PATH=packer.log packer build -var-file=$* packer/template.json
+PACKER_LOG=1 packer build -var-file=$* packer/template.json

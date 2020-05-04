@@ -15,7 +15,3 @@ autoinstall:
   storage:
     layout:
       name: lvm
-  late-commands:
-    # allow password-less sudo for the vagrant user
-    - echo 'vagrant ALL=(ALL) NOPASSWD:ALL' >/target/etc/sudoers.d/99_vagrant
-    - chmod 440 /target/etc/sudoers.d/99_vagrant

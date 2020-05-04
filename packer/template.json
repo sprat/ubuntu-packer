@@ -24,7 +24,7 @@
       "ssh_wait_timeout": "1h",
       "ssh_read_write_timeout": "5m",
       "ssh_handshake_attempts": "1000",
-      "shutdown_command": "sudo shutdown -P now",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "cpus": "{{ user `cpus` }}",
       "memory": "{{ user `memory` }}",
       "disk_size": "{{user `disk_size`}}",
@@ -46,21 +46,21 @@
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "sudo bash {{ .Path }}",
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
       "script": "packer/scripts/1_upgrade.sh",
       "expect_disconnect": true,
       "pause_before": "60s"
     },
     {
       "type": "shell",
-      "execute_command": "sudo bash {{ .Path }}",
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
       "script": "packer/scripts/2_virtualbox.sh",
       "expect_disconnect": true,
       "pause_before": "60s"
     },
     {
       "type": "shell",
-      "execute_command": "sudo bash {{ .Path }}",
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
       "script": "packer/scripts/3_configure_and_cleanup.sh",
       "pause_before": "60s"
     }

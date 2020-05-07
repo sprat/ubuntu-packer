@@ -12,6 +12,4 @@ install:
   - vagrant version
   - packer version
 script:
-  - ./build focal-server.json
-after_failure:
-  - cat *.log
+  - ./build focal-server.json || cat *.log && exit 1

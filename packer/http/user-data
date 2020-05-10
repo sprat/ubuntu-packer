@@ -1,6 +1,8 @@
 #cloud-config
 autoinstall:
   version: 1
+  refresh-installer:
+    update: yes
   apt:
     preserve_sources_list: true
   identity:

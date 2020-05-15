@@ -30,3 +30,7 @@ apt-get -y clean
 
 # get a new machine ID generated on first boot
 truncate -s 0 /etc/machine-id
+
+# help compression of filesystem by zeroing unused space
+dd if=/dev/zero of=/EMPTY bs=1M || true
+rm -f /EMPTY

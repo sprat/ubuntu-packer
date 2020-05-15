@@ -1,0 +1,83 @@
+### Installer settings
+d-i debian-installer/locale en_US
+ubiquity ubiquity/summary string empty
+# reboot needs "noprompt" option on the kernel command line
+ubiquity ubiquity/reboot boolean true
+
+
+# Keyboard selection.
+d-i console-setup/ask_detect boolean false
+d-i keyboard-configuration/layoutcode us
+
+
+### Locale & language
+d-i languagechooser/language-name English
+d-i countrychooser/shortlist US
+d-i localechooser/supported-locales en_US.UTF-8
+
+
+### APT mirror
+#d-i mirror/country string
+#d-i mirror/http/mirror string archive.ubuntu.com
+#d-i mirror/http/proxy string archive.ubuntu.com
+# TODO: set apt mirror to http://archive.ubuntu.com (no country)
+
+
+### Clock and time zone setup
+d-i clock-setup/utc boolean true
+d-i clock-setup/utc-auto boolean true
+d-i time/zone string UTC
+
+
+### Network
+d-i netcfg/hostname string ubuntu
+
+
+### User setup
+d-i passwd/username string vagrant
+d-i passwd/user-fullname string vagrant
+d-i passwd/user-password-crypted password $6$3eh4l4jrtwLvyP$gep6P4HMIhKMAp0YXNG9uotDQqfFbsCkbJ5axoE/15bEJ3xk3jx/q9qtHbEM.7rpkrj3A2K5MSfqo1SLRxo7o/
+
+
+### Partitionning
+d-i partman-auto/disk string /dev/sda
+d-i partman-auto/method string lvm
+d-i partman-auto/choose_recipe select atomic
+d-i partman-auto-lvm/guided_size string max
+d-i partman-lvm/device_remove_lvm boolean true
+d-i partman-md/device_remove_md boolean true
+d-i partman-lvm/confirm boolean true
+d-i partman-lvm/confirm_nooverwrite boolean true
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+
+
+### Packages
+d-i pkgsel/upgrade select none
+d-i pkgsel/update-policy select none
+# ubiquity ubiquity/minimal_install boolean false
+# ubiquity ubiquity/download_updates boolean false
+# TODO: what minimal install is for?
+# TODO: don't download updates since we're upgrading everything anyway?
+
+
+# Language pack selection
+#d-i pkgsel/language-packs multiselect de, en, zh
+#d-i pkgsel/language-pack-patterns string
+#ubiquity pkgsel/ignore-incomplete-language-support boolean
+#ubiquity pkgsel/install-language-support boolean false
+# TODO: fix language pack problems
+
+
+### Success command
+# The success_command feature is very restrictive:
+# - we can't download any script: there's no network during this step
+# - we can't run apt-get to install a package: /var/cache/debconf/config.dat
+#   is locked
+# So the idea here is to add a script to run on next boot in order to
+# install the openssh-server package (which is not on the CD)
+# There's a sleep in the cron job to wait for the network.
+ubiquity ubiquity/success_command string \
+  echo '@reboot root sleep 30 && DEBIAN_FRONTEND=noninteractive apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install openssh-server && rm /etc/cron.d/firstboot' | tee /target/etc/cron.d/firstboot;

@@ -1,0 +1,10 @@
+{
+  "_comment": "Variables file for ubuntu packer template - Xubuntu 20.04 desktop",
+  "name": "focal-xubuntu",
+  "ubuntu_iso_base_url": "http://cdimage.ubuntu.com/xubuntu/releases/20.04/release/",
+  "ubuntu_iso_filename": "xubuntu-20.04-desktop-amd64.iso",
+  "install_options": "automatic-ubiquity noninteractive noprompt url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/desktop.seed",
+  "cpus": "2",
+  "memory": "2048",
+  "disk_size": "32768"
+}

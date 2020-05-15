@@ -19,3 +19,5 @@ However, there are still some differences that can't be avoided:
 - Automatic updates are disabled because it may cause usability problems. If
   you want to enable back the automatic updates, please delete the file
   `/etc/apt/apt.conf.d/99no-periodic-updates` in the VM.
+
+# TODO: add version info to box (date?)

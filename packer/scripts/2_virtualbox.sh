@@ -18,9 +18,6 @@ if [[ -f "$VIRTUALBOX_GUEST_ADDITIONS_ISO" ]]; then
     sh ./VBoxLinuxAdditions.run || [[ $? -eq 2 ]]
     popd >/dev/null
 
-    # uninstall build packages
-    apt-get -y --purge autoremove $BUILD_PACKAGES
-
     # unmount and delete guest additions ISO
     umount /mnt
     rm $VIRTUALBOX_GUEST_ADDITIONS_ISO

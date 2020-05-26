@@ -14,14 +14,18 @@ if [[ -f "$VIRTUALBOX_GUEST_ADDITIONS_ISO" ]]; then
 
     # install the guest additions
     pushd /mnt >/dev/null
-    # ignore exit code 2: it indicates that a reboot is required to load the new drivers
-    sh ./VBoxLinuxAdditions.run || [[ $? -eq 2 ]]
+    INSTALL_EXIT_CODE=0
+    sh ./VBoxLinuxAdditions.run || INSTALL_EXIT_CODE=$?
     popd >/dev/null
 
     # unmount and delete guest additions ISO
     umount /mnt
     rm $VIRTUALBOX_GUEST_ADDITIONS_ISO
 
-    # make sure we load the new drivers
-    reboot
+    # exit code 2 means that a reboot is required to load the new drivers
+    if [[ $INSTALL_EXIT_CODE -eq 2 ]]; then
+        reboot
+    fi
+    # ... or exit with the proper exit code (hopefully 0)
+    exit $INSTALL_EXIT_CODE
 fi

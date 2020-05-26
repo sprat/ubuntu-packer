@@ -12,7 +12,7 @@ install:
   - vagrant version
   - packer version
 script:
-  - ./build focal-server.json &
-  - sleep 60
-  - cat *.log "~/VirtualBox VMs/focal-server/Logs/VBox.log"
+  - (sleep 30; tail -f "~/VirtualBox VMs/focal-server/Logs/*") &
+  - ./build focal-server.json
+  - cat serial.log
   - exit 1

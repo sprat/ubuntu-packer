@@ -1,18 +1,17 @@
 ---
 os: linux
 dist: bionic
-language: minimal
+language: generic
+services:
+  - xvfb
 cache:
   directories:
     - packer_cache
 install:
-  - sudo ./install/virtualbox.sh
-  - sudo ./install/vagrant.sh
+  # - sudo ./install/virtualbox.sh
+  # - sudo ./install/vagrant.sh
   - sudo ./install/packer.sh
   - vagrant version
   - packer version
 script:
-  - (sleep 30; tail -f "~/VirtualBox VMs/focal-server/Logs/*") &
   - ./build focal-server.json
-  - cat serial.log
-  - exit 1

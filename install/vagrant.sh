@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eu
-ARCH=$(dpkg --print-architecture)
+VAGRANT_VERSION="2.2.14"
+VAGRANT_DOWNLOAD_URL="https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb"
 
 # make sure we run the installation script as root
 if [[ $(id -u) -ne 0 ]]; then
@@ -8,10 +9,6 @@ if [[ $(id -u) -ne 0 ]]; then
   exit
 fi
 
-# add the apt repo & key
-wget -qO- https://vagrant-deb.linestarve.com/vagrant-deb.asc | apt-key add - >/dev/null 2>&1
-echo "deb [arch=${ARCH}] https://vagrant-deb.linestarve.com/ any main" >/etc/apt/sources.list.d/vagrant.list
-
-# install
-apt-get update -qq
-apt-get install -y vagrant
+wget -qO vagrant.deb ${VAGRANT_DOWNLOAD_URL}
+apt-get install -y vagrant.deb
+rm vagrant.deb

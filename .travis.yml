@@ -8,6 +8,7 @@ cache:
   directories:
     - packer_cache
 install:
+  - sudo rm -f $(which packer)  # delete the currently installed packer script
   - sudo ./install/virtualbox.sh
   - sudo ./install/vagrant_packer.sh
   - vboxmanage --version

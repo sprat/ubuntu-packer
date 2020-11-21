@@ -20,5 +20,5 @@ echo "deb [arch=${ARCH}] https://download.virtualbox.org/virtualbox/debian ${DIS
 # install
 echo Installing...
 apt-get update -qq
-apt-get install -y "linux-headers-${KERNEL}"
-apt-get install -y "virtualbox-${VIRTUALBOX_MILESTONE}"
+apt-get install -y linux-headers-${KERNEL}
+apt-get install -y virtualbox-${VIRTUALBOX_MILESTONE}

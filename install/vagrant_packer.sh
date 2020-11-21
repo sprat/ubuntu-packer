@@ -18,4 +18,4 @@ echo "deb [arch=${ARCH}] https://apt.releases.hashicorp.com ${DIST} main" >/etc/
 # install
 echo Installing...
 apt-get update -qq
-apt-get install -y "vagrant packer"
+apt-get install -y vagrant packer

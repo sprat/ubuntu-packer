@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 VAR_FILE [OPTIONS...]"
-    echo "where VAR_FILE is focal-server.json, focal-desktop.json, ..."
+    echo "where VAR_FILE is 20.04/server.json, 20.04/xubuntu.json, ..."
     exit 1
 fi
 

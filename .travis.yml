@@ -1,7 +1,7 @@
 ---
 os: linux
 dist: bionic
-language: generic
+language: minimal
 services:
   - xvfb
 cache:

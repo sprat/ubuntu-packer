@@ -12,10 +12,13 @@ if [[ $(id -u) -ne 0 ]]; then
 fi
 
 # add the apt repo & key
+echo Adding APT key...
 wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | apt-key add -
+echo Adding APT repo...
 echo "deb [arch=${ARCH}] https://download.virtualbox.org/virtualbox/debian ${DIST} contrib" >/etc/apt/sources.list.d/virtualbox.list
 
 # install
+echo Installing...
 apt-get update -qq
 apt-get install -y "linux-headers-${KERNEL}"
 apt-get install -y "virtualbox-${VIRTUALBOX_MILESTONE}"

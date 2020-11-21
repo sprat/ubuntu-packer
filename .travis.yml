@@ -9,8 +9,8 @@ cache:
     - packer_cache
 install:
   - sudo ./install/virtualbox.sh
-  - sudo ./install/vagrant.sh
-  - sudo ./install/packer.sh
+  - sudo ./install/vagrant_packer.sh
+  - vboxmanage --version
   - vagrant version
   - packer version
 script:

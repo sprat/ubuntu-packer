@@ -2,13 +2,13 @@
   "builders": [
     {
       "boot_command": [
-        "<esc><wait><esc><wait><esc><wait><enter>",
+        "<esc><esc><esc><enter><wait>",
         "/casper/vmlinuz initrd=/casper/initrd ",
         "console=tty1 quiet ",
         "{{ user `install_options` }} ",
-        "---<wait><enter>"
+        "---<enter>"
       ],
-      "boot_wait": "7s",
+      "boot_wait": "5s",
       "cpus": "{{ user `cpus` }}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Ubuntu_64",

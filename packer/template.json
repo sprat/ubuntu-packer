@@ -1,9 +1,6 @@
 {
   "builders": [
     {
-      "type": "virtualbox-iso",
-      "guest_os_type": "Ubuntu_64",
-      "headless": true,
       "boot_command": [
         "<esc><wait><esc><wait><esc><wait><enter>",
         "/casper/vmlinuz initrd=/casper/initrd ",
@@ -12,61 +9,89 @@
         "---<wait><enter>"
       ],
       "boot_wait": "7s",
+      "cpus": "{{ user `cpus` }}",
+      "disk_size": "{{user `disk_size`}}",
+      "guest_os_type": "Ubuntu_64",
+      "headless": true,
       "http_directory": "packer/http",
+      "iso_checksum": "file:{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
       "iso_urls": [
         "isos/{{ user `ubuntu_iso_filename` }}",
         "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}"
       ],
-      "iso_checksum_url": "{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
-      "iso_checksum_type": "sha256",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "45m",
-      "ssh_read_write_timeout": "5m",
-      "ssh_handshake_attempts": "1000",
-      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
-      "cpus": "{{ user `cpus` }}",
       "memory": "{{ user `memory` }}",
-      "disk_size": "{{user `disk_size`}}",
+      "output_directory": "builds/output-{{ user `name` }}",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "ssh_handshake_attempts": "1000",
+      "ssh_password": "vagrant",
+      "ssh_read_write_timeout": "5m",
+      "ssh_timeout": "45m",
+      "ssh_username": "vagrant",
+      "type": "virtualbox-iso",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
-        ["modifyvm", "{{.Name}}", "--vram", "64"],
-        ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],
-        ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
-        ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--graphicscontroller",
+          "vmsvga"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--vram",
+          "64"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--accelerate3d",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--clipboard",
+          "bidirectional"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--draganddrop",
+          "bidirectional"
+        ]
       ],
       "virtualbox_version_file": "",
-      "vm_name": "{{ user `name` }}",
-      "output_directory": "builds/output-{{ user `name` }}"
-    }
-  ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
-      "script": "packer/scripts/1_upgrade.sh",
-      "expect_disconnect": true,
-      "pause_before": "60s"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
-      "script": "packer/scripts/2_virtualbox.sh",
-      "expect_disconnect": true,
-      "pause_before": "60s"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
-      "script": "packer/scripts/3_configure_and_cleanup.sh",
-      "pause_before": "60s"
+      "vm_name": "{{ user `name` }}"
     }
   ],
   "post-processors": [
     {
-      "type": "vagrant",
       "output": "builds/{{ user `name` }}_{{.Provider}}.box",
+      "type": "vagrant",
       "vagrantfile_template": "packer/Vagrantfile_template"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
+      "expect_disconnect": true,
+      "pause_before": "60s",
+      "script": "packer/scripts/1_upgrade.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
+      "expect_disconnect": true,
+      "pause_before": "60s",
+      "script": "packer/scripts/2_virtualbox.sh",
+      "type": "shell"
+    },
+    {
+      "execute_command": "echo 'vagrant' | sudo -S bash {{ .Path }}",
+      "pause_before": "60s",
+      "script": "packer/scripts/3_configure_and_cleanup.sh",
+      "type": "shell"
     }
   ]
 }
+

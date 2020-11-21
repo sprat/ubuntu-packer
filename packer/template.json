@@ -20,7 +20,7 @@
         "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}"
       ],
       "memory": "{{ user `memory` }}",
-      "output_directory": "builds/output-{{ user `name` }}",
+      "output_directory": "builds/{{ user `name` }}",
       "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "ssh_handshake_attempts": "1000",
       "ssh_password": "vagrant",

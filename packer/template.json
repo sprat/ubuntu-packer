@@ -7,7 +7,7 @@
       "boot_command": [
         "<esc><wait><esc><wait><esc><wait><enter>",
         "/casper/vmlinuz initrd=/casper/initrd ",
-        "console=ttyS0 console=tty1 quiet ",
+        "console=tty1 quiet ",
         "{{ user `install_options` }} ",
         "---<wait><enter>"
       ],
@@ -29,9 +29,6 @@
       "memory": "{{ user `memory` }}",
       "disk_size": "{{user `disk_size`}}",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--uart1", "0x3F8", "4"],
-        ["modifyvm", "{{.Name}}", "--uartmode1", "file", "serial.log"],
-        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
         ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
         ["modifyvm", "{{.Name}}", "--vram", "64"],
         ["modifyvm", "{{.Name}}", "--accelerate3d", "on"],

@@ -15,4 +15,4 @@ install:
   - vagrant version
   - packer version
 script:
-  - ./build focal-server.json
+  - ./build 20.04/server.json

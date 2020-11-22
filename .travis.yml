@@ -4,11 +4,12 @@ dist: bionic
 language: minimal
 services:
   - xvfb
-env:
-  - INSTALL_SCRIPTS_URL=https://raw.githubusercontent.com/sprat/install-scripts/master/
+cache:
+  directories:
+    - packer_cache
 install:
   - sudo rm -f $(which packer)  # delete the currently installed packer script
-  - wget -qO- ${INSTALL_SCRIPTS_URL}/install_virtualbox.sh | sudo bash
-  - wget -qO- ${INSTALL_SCRIPTS_URL}/install_hashicorp_packages.sh | sudo bash -s vagrant packer
+  - wget -qO- https://raw.githubusercontent.com/sprat/install-scripts/master/install_virtualbox.sh | sudo bash
+  - wget -qO- https://raw.githubusercontent.com/sprat/install-scripts/master/install_hashicorp_packages.sh | sudo bash -s vagrant packer
 script:
   - ./build 20.04/server.json

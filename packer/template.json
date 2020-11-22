@@ -32,6 +32,12 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--nictype1",
+          "82540EM"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
           "--graphicscontroller",
           "vmsvga"
         ],

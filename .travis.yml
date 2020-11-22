@@ -9,11 +9,6 @@ env:
 install:
   - sudo rm -f $(which packer)  # delete the currently installed packer script
   - wget -qO- ${INSTALL_SCRIPTS_URL}/install_virtualbox.sh | sudo bash
-  - wget -qO- ${INSTALL_SCRIPTS_URL}/install_hashicorp_repo.sh | sudo bash
-  - sudo apt-get update -qq
-  - sudo apt-get install -yq vagrant packer
-  - vboxmanage --version
-  - vagrant version
-  - packer version
+  - wget -qO- ${INSTALL_SCRIPTS_URL}/install_hashicorp_packages.sh | sudo bash -s vagrant packer
 script:
   - ./build 20.04/server.json

@@ -2,9 +2,9 @@
   "builders": [
     {
       "boot_command": [
-        "<esc><esc><esc><enter><wait>",
+        "<esc><esc><enter><wait>",
         "/casper/vmlinuz initrd=/casper/initrd ",
-        "console=tty1 quiet ",
+        "console=ttyS0 console=tty1 quiet ",
         "{{ user `install_options` }} ",
         "---<enter>"
       ],
@@ -29,6 +29,8 @@
       "ssh_username": "vagrant",
       "type": "virtualbox-iso",
       "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--uart1", "0x3F8", "4"],
+        ["modifyvm", "{{.Name}}", "--uartmode1", "file", "serial.log"],
         [
           "modifyvm",
           "{{.Name}}",

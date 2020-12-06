@@ -1,7 +1,7 @@
 ---
 os: linux
 dist: bionic
-# language: minimal
+language: generic
 services:
   - xvfb
 cache:
@@ -12,4 +12,4 @@ install:
   - wget -qO- https://raw.githubusercontent.com/sprat/install-scripts/master/install_virtualbox.sh | sudo bash
   - wget -qO- https://raw.githubusercontent.com/sprat/install-scripts/master/install_hashicorp_packages.sh | sudo bash -s vagrant packer
 script:
-  - ./build 20.04/server.json
+  - xvfb-run ./build 20.04/server.json

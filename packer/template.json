@@ -1,23 +1,33 @@
 {
+  "variables": {
+    "name": "",
+    "iso_base_url": "",
+    "iso_filename": "",
+    "cpus": "2",
+    "memory": "2048",
+    "disk_size": "16384",
+    "boot_wait": "5s",
+    "boot_escape": "<esc><wait><esc><wait><enter><wait>",
+    "boot_options": ""
+  },
   "builders": [
     {
       "boot_command": [
-        "<esc><wait500ms><esc><wait500ms><esc><wait500ms><enter><wait500ms>",
-        "/casper/vmlinuz initrd=/casper/initrd ",
-        "console=tty1 quiet ",
-        "{{ user `install_options` }} ",
+        "{{ user `boot_escape` }}",
+        "/casper/vmlinuz initrd=/casper/initrd console=tty1 <wait>",
+        "{{ user `boot_options` }} ",
         "---<enter>"
       ],
-      "boot_wait": "5s",
+      "boot_wait": "{{ user `boot_wait` }}",
       "cpus": "{{ user `cpus` }}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Ubuntu_64",
       "headless": true,
       "http_directory": "packer/http",
-      "iso_checksum": "file:{{ user `ubuntu_iso_base_url` }}SHA256SUMS",
+      "iso_checksum": "file:{{ user `iso_base_url` }}SHA256SUMS",
       "iso_urls": [
-        "isos/{{ user `ubuntu_iso_filename` }}",
-        "{{ user `ubuntu_iso_base_url` }}{{ user `ubuntu_iso_filename` }}"
+        "isos/{{ user `iso_filename` }}",
+        "{{ user `iso_base_url` }}{{ user `iso_filename` }}"
       ],
       "memory": "{{ user `memory` }}",
       "output_directory": "builds/{{ user `name` }}",
@@ -31,19 +41,19 @@
       "vboxmanage": [
         [
           "modifyvm",
-          "{{.Name}}",
+          "{{ .Name }}",
           "--nictype1",
-          "82540EM"
+          "virtio"
         ],
         [
           "modifyvm",
-          "{{.Name}}",
+          "{{ .Name }}",
           "--graphicscontroller",
           "vmsvga"
         ],
         [
           "modifyvm",
-          "{{.Name}}",
+          "{{ .Name }}",
           "--vram",
           "64"
         ],
@@ -55,19 +65,18 @@
         ],
         [
           "modifyvm",
-          "{{.Name}}",
+          "{{ .Name }}",
           "--clipboard",
           "bidirectional"
         ],
         [
           "modifyvm",
-          "{{.Name}}",
+          "{{ .Name }}",
           "--draganddrop",
           "bidirectional"
         ]
       ],
       "virtualbox_version_file": "",
-      "vrdp_bind_address": "0.0.0.0",
       "vrdp_port_min": 5900,
       "vrdp_port_max": 5900,
       "vm_name": "{{ user `name` }}"

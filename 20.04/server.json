@@ -1,10 +1,6 @@
 {
-  "_comment": "Variables file for ubuntu packer template - Ubuntu 20.04 server",
   "name": "ubuntu-20.04",
-  "ubuntu_iso_base_url": "http://releases.ubuntu.com/20.04/",
-  "ubuntu_iso_filename": "ubuntu-20.04.1-live-server-amd64.iso",
-  "install_options": "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
-  "cpus": "1",
-  "memory": "1024",
-  "disk_size": "16384"
+  "iso_base_url": "http://releases.ubuntu.com/20.04/",
+  "iso_filename": "ubuntu-20.04.1-live-server-amd64.iso",
+  "boot_options": "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/"
 }

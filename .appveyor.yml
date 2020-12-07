@@ -1,0 +1,15 @@
+---
+image: Ubuntu1804
+version: '{build}'
+environment:
+  APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDG66xLeGxir0Zh6Qp3Rpns0p6egM8akzENjnUWF4oTnAnxjnoOmENmA0LZg0o9AqM8jw0WuXt1R8xJa0ulUB4hkUOMG6hwZvcj8zPKlf6g7HE8QVp8fEP9FGlVo2Jv0DJc4+bfek67jHCn0aXZWLncuH+raNFXTxITevJ1ylNwZShLDzFJErBGZeyF3JpqHe0YZhsNwX3SK/PHNKrpYN4aWC/ULQqI854G+YnEFeIJgzKqoQWm0HSYsZlHEJA8jhXI+wQtXeDF++SwVZ/Mi+ewPc6WAv66hmIiBZtwsOA1nhG1+R9NaGv90AfWPvH3dF/9QTPRKHW+gJ0GOTZE2c5cvMISiX/W+7Wprn37gFimTxqq+DWVx3MuMQ62Sv6Zi/RGPg9d+pfh0L8LpA0EgN6udABGzaK0WBnxwQnPmLEOVI3kkMDBCkRVQzH6eKHgzOzx/clG/N7TTInHkETmyTI7MOH5P9BDHQBwnqo4KZbXsT+T1gRPf/erAyq5OoyQy5H4atSVkqD7Z/zSaJj4dQqj1XJgMTsrjdr/lDLlOJuaiNhxw4H6Sqmkw2V7ao2Or2tN8ewIo68KpiJYdBWHK4R198mGfQvPB3UkyL79oKMw0yIS8nlcuYE/agwlJmJl58brJWA+Ys7U7YLWo+XZg7w/axpjdABUXbtbL/rabYyqyQ== sylvain@poseidon
+init:
+  # enable ssh access
+  - curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+  # compile & load virtualbox drivers
+  - sudo /sbin/vboxconfig
+build_script:
+  - ./build 20.04/server.json
+  # - ./build 20.04/xubuntu.json
+on_failure:
+  - appveyor PushArtifact packer.log

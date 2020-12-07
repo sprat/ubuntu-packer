@@ -1,5 +1,5 @@
-.vagrant
-builds
-isos
-packer_cache
+.vagrant/
+builds/
+isos/
+packer_cache/
 *.log
